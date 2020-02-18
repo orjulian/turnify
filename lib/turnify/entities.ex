@@ -52,7 +52,7 @@ defmodule Turnify.Entities do
   def create_company(attrs \\ %{}) do
     %Company{}
     |> Company.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert!()
   end
 
   @doc """

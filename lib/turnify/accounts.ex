@@ -101,4 +101,11 @@ defmodule Turnify.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  def put_user_assoc(user, assoc, set) do
+    user
+    |> Ecto.Changeset.change
+    |> Ecto.Changeset.put_assoc(assoc, set)
+    |> Repo.update
+  end
 end

@@ -1,6 +1,6 @@
 defmodule TurnifyWeb.Resolvers.Company do
   require IEx
-  alias Turnify.{Repo, Entities.Company}
+  alias Turnify.{Repo, Accounts, Entities}
 
   def create_company(_root, _args, %{ context: %{current_user: current_user, current_company: current_company} }) do
     { :error, "Current User already has a Company associated" }
@@ -8,13 +8,9 @@ defmodule TurnifyWeb.Resolvers.Company do
 
   # Create company only if current_company is nil
   def create_company(_root, args, %{ context: %{current_user: current_user} }) do
-    company = Company.changeset(%Company{}, args)
-    company = Repo.insert!(company)
+    company = Entities.create_company(args)
 
-    current_user
-    |> Ecto.Changeset.change
-    |> Ecto.Changeset.put_assoc(:company, company)
-    |> Repo.update
+    Accounts.put_user_assoc(current_user, :company, company)
     
     { :ok, company }
   end
