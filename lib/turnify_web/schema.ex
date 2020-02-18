@@ -28,6 +28,7 @@ defmodule TurnifyWeb.Schema do
       arg :password, non_null(:string)
       arg :password_confirmation, non_null(:string)
       arg :email, non_null(:string)
+      arg :role, non_null(:string)
 
       resolve &Resolvers.User.create_user/3
     end

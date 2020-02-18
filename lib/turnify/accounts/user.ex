@@ -25,14 +25,31 @@ defmodule Turnify.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :email, [:roles]])
-    |> validate_inclusion(:roles, ~w(professional admin patient))
+    |> cast(attrs, [:username, :password, :email])
     |> validate_required([:username, :email])
     |> validate_length(:password, min: 6)
     |> validate_length(:username, min: 3)
     |> unique_constraint(:username)
     |> unique_constraint(:email)
     |> encrypt_password
+  end
+
+  def patient_changeset(%User{} = user, attrs) do
+    user
+    |> changeset(attrs)
+    |> change(%{roles: ["patient"]})
+  end
+
+  def professional_changeset(%User{} = user, attrs) do
+    user
+    |> changeset(attrs)
+    |> change(%{roles: ["professional"]})
+  end
+
+  def admin_changeset(%User{} = user, attrs) do
+    user
+    |> changeset(attrs)
+    |> change(%{roles: ["admin"]})
   end
 
   def store_token(%User{} = user, token) do
