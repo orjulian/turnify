@@ -12,6 +12,7 @@ defmodule Turnify.Accounts.User do
     field :encrypted_password, :string
     field :username, :string
     field :token, :string
+    field :roles, {:array, :string}, default: ["professional"]
 
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
@@ -24,7 +25,8 @@ defmodule Turnify.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :email])
+    |> cast(attrs, [:username, :password, :email, [:roles]])
+    |> validate_inclusion(:roles, ~w(professional admin patient))
     |> validate_required([:username, :email])
     |> validate_length(:password, min: 6)
     |> validate_length(:username, min: 3)
