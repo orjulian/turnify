@@ -1,0 +1,28 @@
+version: '3.6'
+services:
+  phoenix:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/turnify
+    depends_on:
+      - db
+    command: mix phx.server
+  db:
+    restart: always
+    image: postgres:latest
+    command: 'postgres -c "max_connections=200"'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=5AsVtJk8aX
+      - POSTGRES_USER=turnify_dev
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+    db:
+      driver: local
