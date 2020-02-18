@@ -17,14 +17,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Testing
 
-  * Add proper Absinthe testing.
+  * Add proper Absinthe testing (still experimenting).
 
 ### Features
 
   * Create `Professional`, which belongs to `Company` (one-to-many). 
-  * Create `AvailableDays`, which belogs to `Professional` (one-to-many). A Professional will have a set of available days to work, each one with a time range, that will be used later to assign Turns.
-  * Create `Calendar`, which belongs to `Professional` (one-to-one). A Professional has one Calendar and a Calendar belongs to one Professional.
-  * Create `Turns`, which belongs to `Calendar` (one-to-many).
+  * Create `AvailableDays`, which belogs to `Professional` (one-to-many). A `Professional` will have a set of available days to work, each one with a time range, that will be used later to assign `Appointments`.
+  * Create `Calendar`, which belongs to `Professional` (one-to-one). A Professional has one Calendar and a `Calendar` belongs to one Professional.
+  * Create `Appointment`, which belongs to `Calendar` (one-to-many), and to `Professional` through `Calendar`.
 
 ## Learn more
 
