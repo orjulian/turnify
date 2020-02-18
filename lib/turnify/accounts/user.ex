@@ -12,6 +12,7 @@ defmodule Turnify.Accounts.User do
     field :encrypted_password, :string
     field :username, :string
     field :token, :string
+    field :roles, {:array, :string}, default: ["professional"]
 
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
@@ -31,6 +32,24 @@ defmodule Turnify.Accounts.User do
     |> unique_constraint(:username)
     |> unique_constraint(:email)
     |> encrypt_password
+  end
+
+  def patient_changeset(%User{} = user, attrs) do
+    user
+    |> changeset(attrs)
+    |> change(%{roles: ["patient"]})
+  end
+
+  def professional_changeset(%User{} = user, attrs) do
+    user
+    |> changeset(attrs)
+    |> change(%{roles: ["professional"]})
+  end
+
+  def admin_changeset(%User{} = user, attrs) do
+    user
+    |> changeset(attrs)
+    |> change(%{roles: ["admin"]})
   end
 
   def store_token(%User{} = user, token) do

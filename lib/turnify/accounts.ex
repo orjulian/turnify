@@ -38,7 +38,7 @@ defmodule Turnify.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
-  Creates a user.
+  Creates a basic user.
 
   ## Examples
 
@@ -54,6 +54,34 @@ defmodule Turnify.Accounts do
     |> User.changeset(attrs)
     |> Repo.insert()
   end
+
+  @doc """
+  Creates an user with "patient" role associated. No extra attributes needed.
+  """
+  def create_patient(attrs \\ %{}) do
+    %User{}
+    |> User.patient_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Creates an user with "professional" role associated. No extra attributes needed.
+  """
+  def create_professional(attrs \\ %{}) do
+    %User{}
+    |> User.professional_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Creates an user with "admin" role associated. No extra attributes needed.
+  """
+  def create_admin(attrs \\ %{}) do
+    %User{}
+    |> User.admin_changeset(attrs)
+    |> Repo.insert()
+  end
+
 
   @doc """
   Updates a user.
@@ -102,6 +130,16 @@ defmodule Turnify.Accounts do
     User.changeset(user, %{})
   end
 
+  @doc """
+  Returns a %Struct{}, the one belonging to the record that's being created.
+
+  The assoc param refers to the association being created, 
+  and the set param refers to a struct containing its attributes
+  ## Examples
+
+    iex> put_user_assoc(user, :company, %Turnify.Entities.Company{name: "Testing"})
+    %Turnify.Entities.Company{}
+  """
   def put_user_assoc(user, assoc, set) do
     user
     |> Ecto.Changeset.change
