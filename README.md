@@ -21,8 +21,8 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Features
 
-  * Create `AvailableDays`, which belogs to `User` (one-to-many). An `User` will have a set of available days to work, each one with a list of hours, that will be used later to assign `Appointments`.
-  * Create `Calendar`, which belongs to `User` (one-to-one). A Professional has one Calendar and a `Calendar` belongs to one `User`.
+  * Create `AvailableDays`, which belogs to `Calendar` (one-to-many). An `Calendar` will have a set of available days to work, each one with a list of hours, that will be used later to assign `Appointments`.
+  * Create `Calendar`, which belongs to `User` (one-to-one). An `User` has one Calendar and a `Calendar` belongs to one `User`.
   * Create `Appointment`, which belongs to `Calendar` (one-to-many), and to `User` through `Calendar`.
 
 ## Learn more
