@@ -10,7 +10,7 @@ services:
       - .:/turnify
     depends_on:
       - db
-    command: mix phx.server
+    command: ./script/start_dev.sh
   db:
     restart: always
     image: postgres:latest

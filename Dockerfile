@@ -12,10 +12,6 @@ RUN mix archive.install ./phx_new.ez
 # create app folder
 RUN mkdir /turnify
 WORKDIR /turnify
-COPY mix.exs .
-
-# install dependencies
-RUN mix deps.get
 
 # run phoenix in *dev* mode on port 4000
 # CMD mix phx.server

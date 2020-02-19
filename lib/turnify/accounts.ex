@@ -3,9 +3,9 @@ defmodule Turnify.Accounts do
   The Accounts context.
   """
 
+  require IEx
   import Ecto.Query, warn: false
-  alias Turnify.Repo
-
+  alias Turnify.{Repo, Calendars.Calendar}
   alias Turnify.Accounts.User
 
   @doc """
@@ -70,7 +70,9 @@ defmodule Turnify.Accounts do
   def create_professional(attrs \\ %{}) do
     %User{}
     |> User.professional_changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert!()
+    |> Repo.preload(:calendar)
+    |> put_user_assoc(:calendar, %Calendar{})
   end
 
   @doc """

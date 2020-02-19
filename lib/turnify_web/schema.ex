@@ -5,10 +5,11 @@ defmodule TurnifyWeb.Schema do
   alias TurnifyWeb.Resolvers
 
   query do
+    @desc "Get user by id"
+    field :fetch_user, :user do
+      arg :id, non_null(:integer)
 
-    @desc "Get all users"
-    field :all_users, list_of(:user) do
-      resolve &Resolvers.User.all_users/3
+      resolve &Resolvers.User.fetch_user/3
     end
   end
 
@@ -24,7 +25,6 @@ defmodule TurnifyWeb.Schema do
 
     @desc "Create User"
     field :create_user, :user do
-      arg :username, non_null(:string)
       arg :password, non_null(:string)
       arg :password_confirmation, non_null(:string)
       arg :email, non_null(:string)
