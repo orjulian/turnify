@@ -59,4 +59,63 @@ defmodule Turnify.CalendarsTest do
       assert %Ecto.Changeset{} = Calendars.change_calendar(calendar)
     end
   end
+
+  describe "available_days" do
+    alias Turnify.Calendars.AvailableDay
+
+    @valid_attrs %{day: "some day"}
+    @update_attrs %{day: "some updated day"}
+    @invalid_attrs %{day: nil}
+
+    def available_day_fixture(attrs \\ %{}) do
+      {:ok, available_day} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Calendars.create_available_day()
+
+      available_day
+    end
+
+    test "list_available_days/0 returns all available_days" do
+      available_day = available_day_fixture()
+      assert Calendars.list_available_days() == [available_day]
+    end
+
+    test "get_available_day!/1 returns the available_day with given id" do
+      available_day = available_day_fixture()
+      assert Calendars.get_available_day!(available_day.id) == available_day
+    end
+
+    test "create_available_day/1 with valid data creates a available_day" do
+      assert {:ok, %AvailableDay{} = available_day} = Calendars.create_available_day(@valid_attrs)
+      assert available_day.day == "some day"
+    end
+
+    test "create_available_day/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Calendars.create_available_day(@invalid_attrs)
+    end
+
+    test "update_available_day/2 with valid data updates the available_day" do
+      available_day = available_day_fixture()
+      assert {:ok, %AvailableDay{} = available_day} = Calendars.update_available_day(available_day, @update_attrs)
+      assert available_day.day == "some updated day"
+    end
+
+    test "update_available_day/2 with invalid data returns error changeset" do
+      available_day = available_day_fixture()
+      assert {:error, %Ecto.Changeset{}} = Calendars.update_available_day(available_day, @invalid_attrs)
+      assert available_day == Calendars.get_available_day!(available_day.id)
+    end
+
+    test "delete_available_day/1 deletes the available_day" do
+      available_day = available_day_fixture()
+      assert {:ok, %AvailableDay{}} = Calendars.delete_available_day(available_day)
+      assert_raise Ecto.NoResultsError, fn -> Calendars.get_available_day!(available_day.id) end
+    end
+
+    test "change_available_day/1 returns a available_day changeset" do
+      available_day = available_day_fixture()
+      assert %Ecto.Changeset{} = Calendars.change_available_day(available_day)
+    end
+  end
 end
