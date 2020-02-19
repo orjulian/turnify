@@ -20,7 +20,19 @@ defmodule Turnify.Calendars.AvailableDay do
     |> cast(attrs, [:day, :hours])
     |> validate_required([:day, :hours])
     |> unique_constraint(:day, name: :calendar_day)
-    |> validate_hours_uniqueness()
+    |> validate_hours_format
+    |> validate_hours_uniqueness
+  end
+
+  defp validate_hours_format(changeset) do
+    band = Enum.all? get_field(changeset, :hours), fn hour ->
+      String.match?(hour, ~r/^[0-23]{2}:[0-59]{2}$/)
+    end
+
+    cond do
+      band -> changeset
+      true -> %{changeset | errors: ["Invalid hour format"] ++ changeset.errors, valid?: false}
+    end
   end
 
   defp validate_hours_uniqueness(changeset) do
