@@ -3,10 +3,15 @@ defmodule TurnifyWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Corsica, origins: "http://localhost:8080"
   end
 
   pipeline :graphql do
-    plug Corsica, origins: "*"
+    plug Corsica, 
+      origins: ["http://localhost:8080"], 
+      log: [rejected: :error, invalid: :warn, accepted: :debug],
+      allow_headers: ["content-type"],
+      allow_credentials: true
     plug Turnify.Context
   end
 
