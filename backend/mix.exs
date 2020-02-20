@@ -20,7 +20,7 @@ defmodule Turnify.MixProject do
   def application do
     [
       mod: {Turnify.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :corsica]
     ]
   end
 
@@ -33,6 +33,8 @@ defmodule Turnify.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:corsica, "~> 1.0"},
+
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
 

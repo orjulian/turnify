@@ -6,6 +6,7 @@ defmodule TurnifyWeb.Router do
   end
 
   pipeline :graphql do
+    plug Corsica, origins: "*"
     plug Turnify.Context
   end
 
