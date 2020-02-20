@@ -4,20 +4,19 @@ defmodule Turnify.Accounts.User do
   require IEx
 
   alias Turnify.Accounts.{User, Encryption}
-  alias Turnify.Entities.Company
-  alias Turnify.Repo
+  alias Turnify.{Repo, Entities.Company, Calendars.Calendar}
 
   schema "users" do
     field :email, :string
     field :encrypted_password, :string
-    field :username, :string
     field :token, :string
     field :roles, {:array, :string}, default: ["professional"]
 
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
-    belongs_to :company, Company
+    belongs_to :company,  Company
+    has_one    :calendar, Calendar
 
     timestamps()
   end
@@ -25,11 +24,9 @@ defmodule Turnify.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :email])
-    |> validate_required([:username, :email])
+    |> cast(attrs, [:password, :email])
+    |> validate_required([:email])
     |> validate_length(:password, min: 6)
-    |> validate_length(:username, min: 3)
-    |> unique_constraint(:username)
     |> unique_constraint(:email)
     |> encrypt_password
   end

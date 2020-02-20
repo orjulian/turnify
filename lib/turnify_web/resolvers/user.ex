@@ -4,6 +4,12 @@ defmodule TurnifyWeb.Resolvers.User do
 
   import Comeonin.Bcrypt, only: [checkpw: 2]
 
+  def fetch_user(_root, args, _info) do
+    user = Repo.get!(User, args[:id])
+
+    user
+  end
+
   def sign_in(_root, args, _info) do
     user = Repo.get_by!(User, email: args.email)
 

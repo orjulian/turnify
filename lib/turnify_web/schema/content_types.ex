@@ -3,8 +3,12 @@ defmodule TurnifyWeb.Schema.ContentTypes do
 
   object :user do
     field :id, non_null(:id)
-    field :username, non_null(:string)
     field :email, non_null(:string)
+    field :calendar, :calendar
+  end
+
+  object :calendar do
+    field :id, non_null(:id)
   end
 
   object :company do

@@ -4,7 +4,7 @@ To start your Phoenix server with Docker:
 
   * Run `docker-compose -f development.yml build`
   * Create and migrate your database with `docker-compose -f development.yml run --rm phoenix mix ecto.setup`
-  * Start Phoenix endpoint with `docker-compose -f development.yml run --rm --service-ports phoenix iex -S mix phx.server` in order to have access to `IEx.pry`, otherwise run `docker-compose -f development.yml up` to start the server without access to the interactive console.
+  * Start Phoenix endpoint with `docker-compose -f development.yml run --rm --service-ports phoenix` in order to have access to `IEx.pry`.
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
@@ -12,7 +12,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Devops
 
-  * Add script to run `mix deps.get` inside compose up.
   * Add busybox volume to store deps.
 
 ### Testing
@@ -21,9 +20,12 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Features
 
-  * Create `AvailableDays`, which belogs to `Calendar` (one-to-many). An `Calendar` will have a set of available days to work, each one with a list of hours, that will be used later to assign `Appointments`.
-  * Create `Calendar`, which belongs to `User` (one-to-one). An `User` has one Calendar and a `Calendar` belongs to one `User`.
+  * Create mutation to assign new `AvailableDays` to a `Calendar`.
+    * Validate that the only one allowed to edit items is the `Calendar` owner.
+  * Create query to display `AvailableDays` attached to a `Calendar`.
   * Create `Appointment`, which belongs to `Calendar` (one-to-many), and to `User` through `Calendar`.
+  * Create the `Patient` validations, which will apply after an `Appointment` is setted. If a `Patient` already exists in the database, that one will be used, otherwise a new one will be created.
+    * `Patients` will **only** be created after an `Appointment`, at least for the moment.
 
 ## Learn more
 
