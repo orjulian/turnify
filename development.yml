@@ -1,13 +1,24 @@
 version: '3.6'
 services:
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend:/frontend
+    depends_on:
+      - phoenix
+    command: ./script/start_dev.sh
   phoenix:
     build: 
-      context: .
+      context: backend
       dockerfile: Dockerfile
     ports:
       - 4000:4000
     volumes:
-      - .:/turnify
+      - ./backend:/turnify
     depends_on:
       - db
     command: ./script/start_dev.sh
@@ -24,5 +35,5 @@ services:
       - db:/var/lib/postgresql/data
 
 volumes:
-    db:
-      driver: local
+  db:
+    driver: local
