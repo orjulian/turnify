@@ -2,15 +2,17 @@
 
 ## Project Overview
 
-    The main scope of this project is to bring multiple clinics the possibility of handle appointments inside a single platform. 
+The main scope of this project is to bring multiple clinics the possibility of handle appointments inside a single platform. 
     
 ### Workflow detail
 
-    We will be developing an application where, given the case, an user can register either as an Individual (single professional running a doctor's office) or a Clinic (an organization that manages a lot of professionals). Each one of this users will be able to create a calendar (or multiple, but always one per professional), pick the desired week days where the professional will be working and the time range to set appointments. 
-    Once the appointment is setted, both the patient and the professional will receive a confirmation (via email and sms, if given), and the patient will be asked to confirm its assitance to the appointment. Once the confirmation is placed, that space in the calendar is reserved and no other patient can place an appointment there.
-    The appointments can be placed by both, a clinic administrator or a customer (patient). Each clinic / professional will have its own permalink, and as the main page itself will be the calendar (or a selector with the professionals, prior the calendar display, if it's a clinic) where to place an appointment - having a Calendar (to pick a day), a time selector (e.g.: ["16:30", "16:45", "17:00"] as possible values) and a form to fill with personal data.
+We will be developing an application where, given the case, an user can register either as an Individual (single professional running a doctor's office) or a Clinic (an organization that manages a lot of professionals). Each one of this users will be able to create a calendar (or multiple, but always one per professional), pick the desired week days where the professional will be working and the time range to set appointments. 
 
-    NOTE: If a patient has a pending appointment, will not be able to place another one that same day. A patient can always cancel an appointment.
+Once the appointment is setted, both the patient and the professional will receive a confirmation (via email and sms, if given), and the patient will be asked to confirm its assitance to the appointment. Once the confirmation is placed, that space in the calendar is reserved and no other patient can place an appointment there.
+
+The appointments can be placed by both, a clinic administrator or a customer (patient). Each clinic / professional will have its own permalink, and as the main page itself will be the calendar (or a selector with the professionals, prior the calendar display, if it's a clinic) where to place an appointment - having a Calendar (to pick a day), a time selector (e.g.: ["16:30", "16:45", "17:00"] as possible values) and a form to fill with personal data.
+
+**NOTE**: If a patient has a pending appointment, will not be able to place another one that same day. A patient can always cancel an appointment.
     
 ### Future implementations
     
