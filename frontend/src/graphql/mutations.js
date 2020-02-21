@@ -9,4 +9,16 @@ const SIGNIN = gql`mutation signIn($email: String!, $password: String!) {
   }
 }`
 
-export { SIGNIN }
+const CREATE_USER = gql`mutation createUser($email: String!, $password: String!, $passwordConfirmation: String!, $role: String!) {
+  createUser(
+    email: $email,
+    password: $password,
+    passwordConfirmation: $passwordConfirmation,
+    role: $role
+  ) {
+    id
+    email
+  }
+}`
+
+export { SIGNIN, CREATE_USER }
