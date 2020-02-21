@@ -16,43 +16,44 @@ The appointments can be placed by both, a clinic administrator or a customer (pa
     
 ### Future implementations
     
-    * In the near future will be desired to add a tracking service for patients, following its clinical records and storing each visit (appointment), as well as the reason (patology) behind each one, in order to keep track of the clinical history.
+* In the near future will be desired to add a tracking service for patients, following its clinical records and storing each visit (appointment), as well as the reason (patology) behind each one, in order to keep track of the clinical history.
     
-    * Since a lot of clinics will be operating in the same place, we can even check for fraudulent clients, comparing the data they're using on each clinic and alerting them about a possible scam.
+* Since a lot of clinics will be operating in the same place, we can even check for fraudulent clients, comparing the data they're using on each clinic and alerting them about a possible scam.
 
-    * On-site payment methods. 
+* On-site payment methods. 
 
 ## Views (tech description, non-graphical)
 
 ### Sign up
 
-    **Related mutation:**
-        `createUser(email: String!, role: String!, password: String!, passwordConfirmation: String!)`
+**Related mutation:**  
+`createUser(email: String!, role: String!, password: String!, passwordConfirmation: String!)`
 
-    * First step
-        * The user will have to select between two types: "Individual" or "Clínica".
-        * Once the user select one or another, store the value as Role, that will be sent to GraphQL once finished the process.
+* First step
+    * The user will have to select between two types: "Individual" or "Clínica".
+    * Once the user select one or another, store the value as Role, that will be sent to GraphQL once finished the process.
 
-    * Second step
-        * A form with the following fields will be required to submit: Firstname, Lastname, Email, Password, PasswordConfirmation. 
-        * Each one of those is a WIP, just fields to start testing the app. More will be added in future implementations.
-        * OPTIONAL: add a `validate` button, that sends an email with a code, to secure the given address.
-        * Once finished, the `createUser` mutation should be called. We're creating the user first, then giving the chance of creating the Clinic association. This is to give the users the possibility of finishing the form later, so saving the `registration_state` will be desired.
+* Second step
+    * A form with the following fields will be required to submit: Firstname, Lastname, Email, Password, PasswordConfirmation. 
+    * Each one of those is a WIP, just fields to start testing the app. More will be added in future implementations.
+    * OPTIONAL: add a `validate` button, that sends an email with a code, to secure the given address.
+    * Once finished, the `createUser` mutation should be called. We're creating the user first, then giving the chance of creating the Clinic association. This is to give the users the possibility of finishing the form later, so saving the `registration_state` will be desired.
 
-    * Third step
-        * **Related mutation:** `createCompany(name: String!)`. Remember that, from this point forward, the user token will **always** be required to make a transaction.
-        * A new form with the following fields will be prompted: Name.
+* Third step
+    * **Related mutation:** 
+    `createCompany(name: String!)`. Remember that, from this point forward, the user token will **always** be required to make a transaction.
+    * A new form with the following fields will be prompted: Name.
     
-    * Fourth step
-        * Congratulations screen, showing a brief message and redirecting to the main page.
+* Fourth step
+    * Congratulations screen, showing a brief message and redirecting to the main page.
 
 ### Sign In
     
-    **Related mutation:**
-        `signIn(email: String!, password: String!) { token }`
-        The returned token will be required in the Authorization header.
+**Related mutation:**  
+`signIn(email: String!, password: String!) { token }`
+The returned token will be required in the Authorization header.
 
-    This will be the typical Sign In page, no mysteries attached.
+This will be the typical Sign In page, no mysteries attached.
 
 ### Calendar
     WIP
