@@ -40,7 +40,7 @@ The appointments can be placed by both, a clinic administrator or a customer (pa
     * Once finished, the `createUser` mutation should be called. We're creating the user first, then giving the chance of creating the Clinic association. This is to give the users the possibility of finishing the form later, so saving the `registration_state` will be desired.
 
 * Third step
-    * **Related mutation:** 
+    * **Related mutation:**  
     `createCompany(name: String!)`. Remember that, from this point forward, the user token will **always** be required to make a transaction.
     * A new form with the following fields will be prompted: Name.
     
