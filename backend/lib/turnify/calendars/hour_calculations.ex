@@ -2,7 +2,7 @@ defmodule Turnify.Calendars.HourCalculations do
   @desc """
   When we call add_minutes/3, we assign a default array of hours where to store the future generated hour operations.
 
-  The arguments format are:
+  The arguments' format are:
   hour = String("hh:mm")
   minutes = Int
   scoped_hour = String("hh:mm")
@@ -40,13 +40,11 @@ defmodule Turnify.Calendars.HourCalculations do
     # E.g.: 16:45
     [hr, mn] = String.split(hour, ":")
 
-    # Transform minutes to Integer and perform time addition
-    new_minutes = String.to_integer(mn) + minutes
-
-    # Validate if minutes are bigger than 60 (an hour)
-    case new_minutes do
+    # Transform minutes to Integer and perform time addition, 
+    # therefore validate if minutes are bigger than 60 (an hour)
+    case (String.to_integer(mn) + minutes) do
       # Case positive
-      x when x >= 60 ->
+      new_minutes when new_minutes >= 60 ->
         # calculate the minutes' remanent
         remanent =
           (new_minutes - 60)
@@ -56,7 +54,8 @@ defmodule Turnify.Calendars.HourCalculations do
         new_hour = String.to_integer(hr) + 1
         "#{new_hour}:#{remanent}"
 
-      _ ->
+      # Else return minutes sum
+      new_minutes ->
         "#{hr}:#{new_minutes}"
     end
   end
