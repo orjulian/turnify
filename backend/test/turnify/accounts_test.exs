@@ -6,8 +6,16 @@ defmodule Turnify.AccountsTest do
   describe "users" do
     alias Turnify.Accounts.User
 
-    @valid_attrs %{email: "some email", encrypted_password: "some encrypted_password", username: "some username"}
-    @update_attrs %{email: "some updated email", encrypted_password: "some updated encrypted_password", username: "some updated username"}
+    @valid_attrs %{
+      email: "some email",
+      encrypted_password: "some encrypted_password",
+      username: "some username"
+    }
+    @update_attrs %{
+      email: "some updated email",
+      encrypted_password: "some updated encrypted_password",
+      username: "some updated username"
+    }
     @invalid_attrs %{email: nil, encrypted_password: nil, username: nil}
 
     def user_fixture(attrs \\ %{}) do

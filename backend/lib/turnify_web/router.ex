@@ -7,21 +7,20 @@ defmodule TurnifyWeb.Router do
   end
 
   pipeline :graphql do
-    plug Corsica, 
-      origins: ["http://localhost:8080"], 
+    plug Corsica,
+      origins: ["http://localhost:8080"],
       log: [rejected: :error, invalid: :warn, accepted: :debug],
       allow_headers: ["content-type"],
       allow_credentials: true
+
     plug Turnify.Context
   end
 
   scope "/api" do
     pipe_through(:graphql)
 
-    forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: TurnifyWeb.Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: TurnifyWeb.Schema
 
-    forward "/", Absinthe.Plug,
-      schema: TurnifyWeb.Schema
+    forward "/", Absinthe.Plug, schema: TurnifyWeb.Schema
   end
 end

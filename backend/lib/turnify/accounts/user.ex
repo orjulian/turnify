@@ -15,8 +15,8 @@ defmodule Turnify.Accounts.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
-    belongs_to :company,  Company
-    has_one    :calendar, Calendar
+    belongs_to :company, Company
+    has_one :calendar, Calendar
 
     timestamps()
   end
@@ -51,12 +51,13 @@ defmodule Turnify.Accounts.User do
 
   def store_token(%User{} = user, token) do
     user
-    |> change(%{ token: token })
+    |> change(%{token: token})
     |> Repo.update()
   end
 
   defp encrypt_password(changeset) do
     password = get_change(changeset, :password)
+
     if password do
       encrypted_password = Encryption.hash_password(password)
       put_change(changeset, :encrypted_password, encrypted_password)

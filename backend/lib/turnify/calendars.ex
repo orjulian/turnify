@@ -115,9 +115,9 @@ defmodule Turnify.Calendars do
   """
   def put_calendar_multi_assoc(calendar, assoc, multi_set) do
     calendar
-    |> Ecto.Changeset.change
+    |> Ecto.Changeset.change()
     |> Ecto.Changeset.put_assoc(assoc, multi_set)
-    |> Repo.update
+    |> Repo.update()
   end
 
   @doc """

@@ -7,7 +7,7 @@ defmodule Turnify.Entities.Company do
   schema "companies" do
     field :name, :string
     field :token, :string
-    
+
     has_many :users, User
 
     timestamps()
@@ -25,6 +25,7 @@ defmodule Turnify.Entities.Company do
 
   defp generate_token(changeset) do
     name = get_change(changeset, :name)
+
     changeset
     |> change(%{token: :base64.encode(:crypto.strong_rand_bytes(24))})
   end
