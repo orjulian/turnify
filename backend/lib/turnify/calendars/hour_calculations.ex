@@ -8,7 +8,7 @@ defmodule Turnify.Calendars.HourCalculations do
       current_hour when current_hour <= scoped_hour ->
         add_minutes(current_hour, minutes, scoped_hour, hours)
 
-      current_hour when current_hour > scoped_hour ->
+      _ ->
         hours
     end
   end
