@@ -24,4 +24,10 @@ defmodule TurnifyWeb.Schema.ContentTypes do
   object :sign_in do
     field :token, :string
   end
+
+  input_object :time_range do
+    field :hour_from, non_null(:string)
+    field :hour_to, non_null(:string)
+    field :minutes_span, non_null(:integer)
+  end
 end

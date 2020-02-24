@@ -32,7 +32,7 @@ defmodule Turnify.Calendars.AvailableDay do
 
     cond do
       band -> changeset
-      true -> %{changeset | errors: ["Invalid hour format"] ++ changeset.errors, valid?: false}
+      true -> %{changeset | errors: ["Invalid hour format" | changeset.errors], valid?: false}
     end
   end
 

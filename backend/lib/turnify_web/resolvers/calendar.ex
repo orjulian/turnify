@@ -4,12 +4,7 @@ defmodule TurnifyWeb.Resolvers.Calendar do
   alias Turnify.Calendars
 
   def create_available_day(_, args, %{context: %{current_calendar: current_calendar}}) do
-    hours =
-      Calendars.HourCalculations.add_minutes(
-        args[:hour_from],
-        args[:minutes_span],
-        args[:hour_to]
-      )
+    hours = Calendars.HourCalculations.add_minutes(args[:time_range])
 
     attrs = %{day: args[:day], hours: hours}
     # Need to handle error properly

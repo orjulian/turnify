@@ -1,4 +1,6 @@
 defmodule Turnify.Calendars.HourCalculations do
+  require IEx
+
   @desc """
   When we call add_minutes/3, we assign a default array of hours where to store the future generated hour operations.
 
@@ -58,5 +60,34 @@ defmodule Turnify.Calendars.HourCalculations do
       new_minutes ->
         "#{hr}:#{new_minutes}"
     end
+  end
+
+  @desc """
+  This time we loop through a list of multiple time ranges.
+  For example: 
+  [
+    {hour_from: "11:00", hour_to: "11:30", minutes_span: 10}, 
+    {hour_from: "16:00", hour_to: "16:30", minutes_span: 15}
+  ]
+
+  And it will return:
+  ["16:30",
+  "16:15",
+  "16:00",
+  "11:30",
+  "11:20",
+  "11:10",
+  "11:00"]
+
+  This allows us to threat multiple time ranges differently, with its own minutes span
+  and assign them all in a single transaction later.
+  """
+  def add_minutes(time_range) do
+    hours =
+      for time <- time_range do
+        add_minutes(time[:hour_from], time[:minutes_span], time[:hour_to])
+      end
+
+    List.flatten(hours)
   end
 end
