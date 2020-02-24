@@ -38,5 +38,13 @@ defmodule TurnifyWeb.Schema do
 
       resolve(&Resolvers.Company.create_company/3)
     end
+
+    @desc "Create calendar's available_day"
+    field :create_available_day, :available_day do
+      arg(:day, non_null(:string))
+      arg(:hours, list_of(non_null(:string)))
+
+      resolve(&Resolvers.Calendar.create_available_day/3)
+    end
   end
 end

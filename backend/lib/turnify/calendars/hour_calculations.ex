@@ -42,7 +42,7 @@ defmodule Turnify.Calendars.HourCalculations do
 
     # Transform minutes to Integer and perform time addition, 
     # therefore validate if minutes are bigger than 60 (an hour)
-    case (String.to_integer(mn) + minutes) do
+    case String.to_integer(mn) + minutes do
       # Case positive
       new_minutes when new_minutes >= 60 ->
         # calculate the minutes' remanent

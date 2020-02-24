@@ -30,7 +30,7 @@ defmodule Turnify.Context do
     User
     |> where(token: ^token)
     |> Repo.one()
-    |> Repo.preload(:company)
+    |> Repo.preload([:company, :calendar])
     |> case do
       nil ->
         {:error, "Invalid authorization token"}
@@ -40,6 +40,12 @@ defmodule Turnify.Context do
 
         fields =
           if(user.company, do: Map.put_new(fields, :current_company, user.company), else: fields)
+
+        fields =
+          if(Enum.member?(user.roles, "professional"),
+            do: Map.put_new(fields, :current_calendar, user.calendar),
+            else: fields
+          )
 
         {:ok, fields}
     end

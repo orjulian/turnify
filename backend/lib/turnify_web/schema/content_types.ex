@@ -7,13 +7,18 @@ defmodule TurnifyWeb.Schema.ContentTypes do
     field :calendar, :calendar
   end
 
+  object :company do
+    field :id, non_null(:id)
+    field :name, non_null(:string)
+  end
+
   object :calendar do
     field :id, non_null(:id)
   end
 
-  object :company do
-    field :id, non_null(:id)
-    field :name, non_null(:string)
+  object :available_day do
+    field :day, non_null(:string)
+    field :hours, list_of(non_null(:string))
   end
 
   object :sign_in do

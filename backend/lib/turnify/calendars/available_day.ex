@@ -27,7 +27,7 @@ defmodule Turnify.Calendars.AvailableDay do
   defp validate_hours_format(changeset) do
     band =
       Enum.all?(get_field(changeset, :hours), fn hour ->
-        String.match?(hour, ~r/^[0-23]{2}:[0-59]{2}$/)
+        String.match?(hour, ~r/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/)
       end)
 
     cond do

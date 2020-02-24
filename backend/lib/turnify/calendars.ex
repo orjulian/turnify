@@ -110,13 +110,14 @@ defmodule Turnify.Calendars do
   and the set param refers to a struct containing its attributes
   ## Examples
 
-  iex> put_calendar_assoc(calendar, :available_days, %Turnify.Calendars.AvailableDay{day: "Thursday", hours: ["16:30", "16:45"]})
+  iex> Turnify.Calendars.put_calendar_assoc(calendar, :available_days, %Turnify.Calendars.AvailableDay{day: "Thursday", hours: ["16:30", "16:45"]})
   %Turnify.Calendars.AvailableDay{}
   """
-  def put_calendar_multi_assoc(calendar, assoc, multi_set) do
+  def put_calendar_assoc(calendar, assoc, set) do
     calendar
+    |> Repo.preload(assoc)
     |> Ecto.Changeset.change()
-    |> Ecto.Changeset.put_assoc(assoc, multi_set)
+    |> Ecto.Changeset.put_assoc(assoc, set)
     |> Repo.update()
   end
 
