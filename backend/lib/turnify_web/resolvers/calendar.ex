@@ -1,18 +1,27 @@
 defmodule TurnifyWeb.Resolvers.Calendar do
   require IEx
 
-  alias Turnify.{Repo, Calendars}
+  alias Turnify.Calendars
 
   def create_available_day(_, args, %{context: %{current_calendar: current_calendar}}) do
-    available_day = Calendars.create_available_day(args)
+    hours =
+      Calendars.HourCalculations.add_minutes(
+        args[:hour_from],
+        args[:minutes_span],
+        args[:hour_to]
+      )
 
-    Calendars.put_calendar_assoc(current_calendar, :available_days, [available_day])
+    attrs = %{day: args[:day], hours: hours}
+    # Need to handle error properly
+    # Something like block below
+    available_day = Calendars.AvailableDay.changeset(%Calendars.AvailableDay{}, attrs)
 
-    available_day
-  end
-
-  def create_available_day(_, args, _) do
-    {:error, "Unauthorized"}
+    case Calendars.put_calendar_assoc(current_calendar, :available_days, [
+           available_day | current_calendar.available_days
+         ]) do
+      {:ok, _} -> {:ok, attrs}
+      {:error, changeset} -> {:error, "AvailableDay is invalid"}
+    end
   end
 
   def create_available_day(_, _, _) do

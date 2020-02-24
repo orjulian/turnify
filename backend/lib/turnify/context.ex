@@ -43,7 +43,12 @@ defmodule Turnify.Context do
 
         fields =
           if(Enum.member?(user.roles, "professional"),
-            do: Map.put_new(fields, :current_calendar, user.calendar),
+            do:
+              Map.put_new(
+                fields,
+                :current_calendar,
+                user.calendar |> Repo.preload(:available_days)
+              ),
             else: fields
           )
 
