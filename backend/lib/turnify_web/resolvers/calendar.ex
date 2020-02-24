@@ -20,7 +20,8 @@ defmodule TurnifyWeb.Resolvers.Calendar do
            available_day | current_calendar.available_days
          ]) do
       {:ok, _} -> {:ok, attrs}
-      {:error, changeset} -> {:error, "AvailableDay is invalid"}
+      # Here will be better to fetch errors from changeset
+      {:error, _changeset} -> {:error, "AvailableDay is invalid"}
     end
   end
 
