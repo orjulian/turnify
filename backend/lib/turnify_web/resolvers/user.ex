@@ -1,4 +1,5 @@
 defmodule TurnifyWeb.Resolvers.User do
+  require IEx
   alias Turnify.{Repo, Guardian}
   alias Turnify.{Accounts, Accounts.User}
 
@@ -20,7 +21,7 @@ defmodule TurnifyWeb.Resolvers.User do
         {:ok, %{token: token}}
 
       user ->
-        {:error, %{}}
+        {:error, "Wrong credentials"}
     end
   end
 

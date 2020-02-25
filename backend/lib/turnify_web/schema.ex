@@ -42,6 +42,7 @@ defmodule TurnifyWeb.Schema do
     @desc "Create calendar's available_day"
     field :create_available_day, :available_day do
       arg(:day, non_null(:string))
+      arg(:scoped_calendar_id, :integer)
       arg(:time_range, list_of(non_null(:time_range)))
 
       resolve(&Resolvers.Calendar.create_available_day/3)
