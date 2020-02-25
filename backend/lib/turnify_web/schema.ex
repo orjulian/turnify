@@ -47,5 +47,13 @@ defmodule TurnifyWeb.Schema do
 
       resolve(&Resolvers.Calendar.create_available_day/3)
     end
+
+    @desc "Delete calendar's available day"
+    field :delete_available_day, :available_day do
+      arg(:day, non_null(:string))
+      arg(:scoped_calendar_id, :integer)
+
+      resolve(&Resolvers.Calendar.delete_available_day/3)
+    end
   end
 end
