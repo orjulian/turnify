@@ -34,18 +34,14 @@ defmodule Turnify.MixProject do
   defp deps do
     [
       {:corsica, "~> 1.0"},
-
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_ecto, "~> 0.1.3"},
       {:absinthe_relay, "~> 1.4"},
       {:absinthe_phoenix, "~> 1.4"},
-
       {:guardian, "~> 2.0"},
-
       {:phoenix, "~> 1.4.11"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},

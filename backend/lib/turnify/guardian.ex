@@ -1,7 +1,7 @@
 defmodule Turnify.Guardian do
   use Guardian, otp_app: :turnify
 
-  alias Turnify.{ Repo, Accounts.User }
+  alias Turnify.{Repo, Accounts.User}
 
   def subject_for_token(user, _claims) do
     # You can use any value for the subject of your token but
@@ -22,4 +22,3 @@ defmodule Turnify.Guardian do
     {:ok, resource}
   end
 end
-

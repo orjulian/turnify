@@ -5,7 +5,7 @@ defmodule Turnify.Context do
   import Plug.Conn
   import Ecto.Query, only: [where: 2]
 
-  alias Turnify.{ Accounts.User, Repo }
+  alias Turnify.{Accounts.User, Repo}
 
   def init(opts), do: opts
 
@@ -13,6 +13,7 @@ defmodule Turnify.Context do
     case build_context(conn) do
       {:ok, context} ->
         put_private(conn, :absinthe, %{context: context})
+
       _ ->
         conn
     end
@@ -29,14 +30,29 @@ defmodule Turnify.Context do
     User
     |> where(token: ^token)
     |> Repo.one()
-    |> Repo.preload(:company)
+    |> Repo.preload([:company, :calendar])
     |> case do
-      nil -> {:error, "Invalid authorization token"}
-      user -> 
+      nil ->
+        {:error, "Invalid authorization token"}
+
+      user ->
         fields = %{current_user: user, token: token}
-        fields = if(user.company, do: Map.put_new(fields, :current_company, user.company), else: fields)
+
+        fields =
+          if(user.company, do: Map.put_new(fields, :current_company, user.company), else: fields)
+
+        fields =
+          if(Enum.member?(user.roles, "professional"),
+            do:
+              Map.put_new(
+                fields,
+                :current_calendar,
+                user.calendar |> Repo.preload(:available_days)
+              ),
+            else: fields
+          )
+
         {:ok, fields}
     end
   end
 end
-

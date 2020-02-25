@@ -7,6 +7,5 @@ defmodule Turnify.Repo.Migrations.CreateCalendars do
 
       timestamps()
     end
-
   end
 end

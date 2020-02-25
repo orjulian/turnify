@@ -1,4 +1,5 @@
 defmodule TurnifyWeb.Resolvers.User do
+  require IEx
   alias Turnify.{Repo, Guardian}
   alias Turnify.{Accounts, Accounts.User}
 
@@ -18,18 +19,20 @@ defmodule TurnifyWeb.Resolvers.User do
         {:ok, token, _claims} = Guardian.encode_and_sign(user)
         {:ok, _} = User.store_token(user, token)
         {:ok, %{token: token}}
+
       user ->
-        {:error, %{}}
+        {:error, "Wrong credentials"}
     end
   end
 
   def create_user(_root, args, _info) do
-    user = case args[:role] do
-      "patient" -> Accounts.create_patient(args)
-      "admin" -> Accounts.create_admin(args)
-      "professional" -> Accounts.create_professional(args)
-      _ -> {:error, message: "Role is invalid"}
-    end
+    user =
+      case args[:role] do
+        "patient" -> Accounts.create_patient(args)
+        "admin" -> Accounts.create_admin(args)
+        "professional" -> Accounts.create_professional(args)
+        _ -> {:error, message: "Role is invalid"}
+      end
 
     user
   end

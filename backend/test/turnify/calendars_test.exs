@@ -97,13 +97,19 @@ defmodule Turnify.CalendarsTest do
 
     test "update_available_day/2 with valid data updates the available_day" do
       available_day = available_day_fixture()
-      assert {:ok, %AvailableDay{} = available_day} = Calendars.update_available_day(available_day, @update_attrs)
+
+      assert {:ok, %AvailableDay{} = available_day} =
+               Calendars.update_available_day(available_day, @update_attrs)
+
       assert available_day.day == "some updated day"
     end
 
     test "update_available_day/2 with invalid data returns error changeset" do
       available_day = available_day_fixture()
-      assert {:error, %Ecto.Changeset{}} = Calendars.update_available_day(available_day, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Calendars.update_available_day(available_day, @invalid_attrs)
+
       assert available_day == Calendars.get_available_day!(available_day.id)
     end
 

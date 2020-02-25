@@ -27,7 +27,7 @@ config :phoenix, :json_library, Jason
 
 config :turnify, Turnify.Guardian,
   issuer: "Turnify",
-  ttl: { 30, :days},
+  ttl: {30, :days},
   verify_issuer: true,
   secret_key: "kZTqvzBVDX3HKQM1WxA0TRysmyjP0fqYxPa7ZWXqRVqetgLcGr93pdu6QmWNoHu"
 

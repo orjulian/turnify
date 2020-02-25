@@ -11,6 +11,5 @@ defmodule Turnify.Repo.Migrations.CreateAvailableDays do
     end
 
     create unique_index(:available_days, [:day, :calendar_id], name: :calendar_day)
-
   end
 end
